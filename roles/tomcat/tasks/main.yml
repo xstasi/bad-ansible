@@ -1,0 +1,23 @@
+---
+- name: install tomcat
+  yum:
+    name: tomcat
+    state: latest
+
+
+- name: create ansible tomcat directory
+  file:
+    path: /usr/share/tomcat/webapps/ROOT
+    state: directory
+
+- name: copy static index.html to tomcat webapps ROOT
+  template:
+    src: index.html.j2
+    dest: "/usr/share/tomcat/webapps/ROOT/index.html"
+    mode: 0644
+
+- name: enable tomcat at boot
+  service:
+    name: tomcat
+    enabled: yes
+    state: started

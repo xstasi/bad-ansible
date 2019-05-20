@@ -1,5 +1,6 @@
 [internal:vars]
 GUID="{{ lookup('env', 'GUID') }}"
+tomcat_port = 8080
 
 [frontends] # These are the frontend servers
 frontend1 ansible_host=frontend1."{{ GUID }}".internal
