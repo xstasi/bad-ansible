@@ -1,22 +1,22 @@
 ---
-- name: install tomcat
+- name: Tomcat is installed
   yum:
     name: tomcat
     state: latest
 
 
-- name: create ansible tomcat directory
+- name: The ROOT app directory for tomcat exists
   file:
     path: /usr/share/tomcat/webapps/ROOT
     state: directory
 
-- name: copy static index.html to tomcat webapps ROOT
+- name: The ROOT app on tomcat has an index.html
   template:
     src: index.html.j2
     dest: "/usr/share/tomcat/webapps/ROOT/index.html"
     mode: 0644
 
-- name: enable tomcat at boot
+- name: Tomcat is enabled and started
   service:
     name: tomcat
     enabled: yes

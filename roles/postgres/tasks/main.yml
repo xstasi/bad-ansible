@@ -1,17 +1,27 @@
 ---
-- name: install postgres
+- name: PostgreSQL is installed
   yum:
     name: postgresql-server
     state: latest
 
-- name: initilize postgres
+- name: A PostgreSQL database is initialised
   command: /bin/postgresql-setup initdb
   args:
     creates: /var/lib/pgsql/data/PG_VERSION
 
-- name: enable postgresql at boot and start it
+- name: PostgreSQL is enabled and started
   service:
     name: postgresql
     enabled: yes
     state: started
 
+- name: Check if postgres is running
+  command: psql -l
+  become_user: postgres
+  changed_when: false
+  register: psql_l_res
+
+- name: Fail if postgres is not running
+  fail:
+    msg: postgres is not running
+  when: psql_l_res.rc != 0

@@ -1,11 +1,4 @@
 ---
-#- hosts: apps
-#  roles:
-#    - apache
-#- name: Setup apache on apps
-#  hosts: apps
-#  roles:
-#    - apache
 
 - name: base setup
   hosts: all
